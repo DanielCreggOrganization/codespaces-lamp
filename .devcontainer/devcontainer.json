@@ -9,7 +9,7 @@
 	  },
 	  "waitFor": "onCreateCommand",
 	  "updateContentCommand": "sudo apt-get update && sudo apt-get install -y apache2 mysql-server php-mysql",
-	  "postCreateCommand": "sudo a2enmod rewrite && sudo service apache2 restart && sudo service mysql restart && echo 'Listen 8080' >> /etc/apache2/ports.conf && a2enmod rewrite",
+	  "postCreateCommand": "sudo a2enmod rewrite && sudo service apache2 restart && sudo service mysql restart && echo 'Listen 8080' >> /etc/apache2/ports.conf && sudo sed -i 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/public/g' /etc/apache2/sites-available/000-default.conf && sudo service apache2 restart && a2enmod rewrite",
 	  "postAttachCommand": {
 		"server": "ls -al"
 	  },
@@ -36,7 +36,6 @@
 	
 	// Use 'postCreateCommand' to run commands after the container is created.
 	//"postCreateCommand": "sudo apt-get update && sudo apt-get install -y apache2 mysql-server php-mysql && sudo a2enmod rewrite && sudo service apache2 restart && sudo service mysql restart && echo "Listen 8080" >> /etc/apache2/ports.conf && a2enmod rewrite",
-	
 	
 	// Configure tool-specific properties.
 	// "customizations": {},
